@@ -4,8 +4,8 @@ from pathlib import Path
 import os
 import environ
 import cloudinary
-import django
 import dj_database_url
+import django_heroku
 
 cloudinary.config(
     cloud_name=os.environ.get('CLOUD_NAME'),
@@ -100,6 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+django_heroku.settings(locals())
 
 DATABASES = {
     'default': dj_database_url.config(
