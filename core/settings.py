@@ -41,17 +41,17 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     'apps.user',
-    # 'apps.account',
+    'apps.account',
     # 'drf_yasg',
 ]
 
 MAIN_APPS = [
-    # 'apps.product',
-    # 'apps.cart',
-    # 'apps.wishlist',
-    # 'apps.shipping',
-    # 'apps.coupon',
-    # 'apps.order',
+    'apps.product',
+    'apps.cart',
+    'apps.wishlist',
+    'apps.shipping',
+    'apps.coupon',
+    'apps.order',
 ]
 
 THIRD_PARTY_APPS = [
