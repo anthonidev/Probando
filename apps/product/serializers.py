@@ -5,7 +5,6 @@ from .models import Category, CharacteristicProduct, Product, Brand, ProductImag
 class CharacteristicProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = CharacteristicProduct
-
         fields = [
             'title',
             'description',
@@ -101,7 +100,8 @@ class CategoryChildrenSerializer(serializers.ModelSerializer):
             'slug',
             'get_parent',
             'get_parent_slug',
-            'get_total'
+            'get_total',
+            'photo'
         ]
 
 
