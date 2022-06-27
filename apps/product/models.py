@@ -83,7 +83,7 @@ class Product(models.Model):
             if Product.objects.filter(slug=to_assign).exists():
                 to_assign = to_assign+str(Product.objects.all().count())
             self.slug = to_assign
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_colors(self):
         if (self.parent):
