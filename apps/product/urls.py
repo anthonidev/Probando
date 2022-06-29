@@ -10,11 +10,11 @@ from apps.product.views import (
     ListProductsHomeView,
     ProductDetailView,
     ProductsCategoryView,
-    ProductDetailView
+    ProductDetailView,
+    RecommendationProductView
 )
 
 app_name = "product"
-
 urlpatterns = [
     path('categories', ListCategoryView.as_view()),
     path('products_homepage', ListProductsHomeView.as_view()),
@@ -25,6 +25,6 @@ urlpatterns = [
     path('category/<slug>', ProductsCategoryView.as_view()),
     path('category/subcategory/<slug>', GetSubCategoryView.as_view()),
     path('brand/<id>', BrandsCategoryView.as_view()),
-    
+    path('recomendation', RecommendationProductView.as_view()),
     path('<slug>', ProductDetailView.as_view()),
 ]

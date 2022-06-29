@@ -10,18 +10,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('account', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('order', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
+            model_name='userprofile',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
-        migrations.AlterUniqueTogether(
-            name='orderitem',
-            unique_together={('order', 'product')},
+        migrations.AddField(
+            model_name='useraddress',
+            name='account',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='account.userprofile'),
         ),
     ]

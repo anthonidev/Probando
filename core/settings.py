@@ -23,26 +23,22 @@ DEBUG = os.environ.get('DEBUG')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-SECRET_KEY = 'django-insecure-78%najy+(xgs3r4ej-1tpt1l_9wi%n-ly*76@1^7i^!2pi=(a$'
 ALLOWED_HOSTS = ['*']
 
-
 DJANGO_APPS = [
-    # 'jazzmin',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 ]
 
 PROJECT_APPS = [
     'apps.user',
     'apps.account',
-    # 'drf_yasg',
+    'drf_yasg',
 ]
 
 MAIN_APPS = [
@@ -151,19 +147,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGE_CODE = 'es'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
 USE_I18N = True
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -181,7 +170,6 @@ JAZZMIN_SETTINGS = {
         {"model": "user.UserAccount"},
         {"app": "product"},
     ],
-
     "show_sidebar": True,
     "navigation_expanded": True,
     "hide_apps": [
@@ -190,7 +178,6 @@ JAZZMIN_SETTINGS = {
         "rest_framework_simplejwt",
         "token_blacklist"
     ],
-
     "hide_models": [
         "cart.CartItem",
         "order.OrderItem",
@@ -198,15 +185,8 @@ JAZZMIN_SETTINGS = {
         "product.CharacteristicProduct",
         "product.ProductImage",
     ],
-
-    # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": ["user", "product", "order", "shipping", "coupon", "cart", "account"],
 
-    # Custom links to append to app groups, keyed on app name
-
-
-    # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
-    # for the full list of 5.13.0 free icon classes
     "icons": {
         "user.UserAccount": "fas fa-user",
         "product.brand": "fas fa-copyright",
@@ -223,9 +203,6 @@ JAZZMIN_SETTINGS = {
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fa fa-check",
 
-
-
-
 }
 JAZZMIN_UI_TWEAKS = {
     "brand_colour": "navbar-success",
@@ -238,7 +215,6 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_fixed": False,
     "sidebar": "sidebar-dark-success",
     "sidebar_nav_child_indent": True,
-
     "theme": "minty",
     "button_classes": {
         "primary": "btn-outline-primary",
@@ -250,8 +226,6 @@ JAZZMIN_UI_TWEAKS = {
     },
     "site_brand": "ATON"
 }
-
-
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', ),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10080),
@@ -310,12 +284,13 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "user.UserAccount"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-DEFAULT_FROM_EMAIL = 'ATON - Empresa  <anthoni_pydev@anthonidev.me>'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+if not DEBUG:
+    DEFAULT_FROM_EMAIL = 'ATON - Empresa  <anthoni_pydev@anthonidev.me>'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.environ.get('EMAIL_HOST')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = os.environ.get('EMAIL_PORT')
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')

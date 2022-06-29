@@ -255,13 +255,13 @@ class ProcessOrderView(APIView):
 
         try:
             send_mail(
-                'Your Order Details',
-                'Hey ' + full_name + ','
-                + '\n\nWe recieved your order!'
-                + '\n\nGive us some time to process your order and ship it out to you.'
-                + '\n\nYou can go on your user dashboard to check the status of your order.'
-                + '\n\nSincerely,'
-                + '\nShop Time',
+                'Detalle de tu pedido en Aton Perú',
+                'Hola ' + full_name + ','
+                + '\n\n¡Recibimos tu pedido!'
+                + '\n\nDanos algo de tiempo para procesar tu pedido y enviártelo.'
+                + '\n\nPuede ir a su panel de usuario para verificar el estado de su pedido.'
+                + '\n\nGracias por su pedido,'
+                + '\nAton Peru',
                 'anthoni_pydev@anthonidev.me',
                 [user.email],
                 fail_silently=False
@@ -275,10 +275,6 @@ class ProcessOrderView(APIView):
         try:
             # Vaciar carrito de compras
             CartItem.objects.filter(cart=cart).delete()
-
-            # Actualizar carrito
-            Cart.objects.filter(user=user).update(total_items=0)
-
         except:
             return Response(
                 {'error': 'Transaction succeeded and order successful, but failed to clear cart'},

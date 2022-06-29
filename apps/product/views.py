@@ -1,12 +1,9 @@
-import random
-from .models import Brand, Category, CharacteristicProduct, Product, ProductImage
+from .models import Brand, Category,  Product, ProductImage
 from .serializers import (
     BrandSerializer,
     CategoryChildrenSerializer,
     CategorySerializer,
-    CharacteristicProductSerializer,
     DetailProductSerializer,
-    ProductImageSerializer,
     ProductSerializer
 )
 from rest_framework import status, permissions
@@ -14,8 +11,34 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
+from rest_framework.views import APIView
 
 from datetime import datetime
+
+# class ProductRecomendationPagination(PageNumberPagination):
+#     page_size = 12
+#     page_size_query_param = 'page_size'
+#     max_page_size = 100
+
+
+class RecommendationProductView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    pagination_class = None
+    permission_classes = (permissions.AllowAny,)
+    queryset = Product.objects.all()
+
+    def post(self, request, format=None):
+        queryset = self.get_queryset()
+        data = request.data
+        ids = data['ids']
+        queryset = queryset.filter(is_featured=True).order_by('?')
+        if ids:
+            for id in ids:
+                if Product.objects.filter(id=id).exists():
+                    queryset = queryset.exclude(id=id)
+        queryset = queryset[:4]
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class ProductDetailView(generics.RetrieveAPIView):
@@ -35,7 +58,6 @@ class ProductDetailView(generics.RetrieveAPIView):
             return Response(
                 {'error': 'Product with this ID does not exist'},
                 status=status.HTTP_404_NOT_FOUND)
-
 
 
 class ListBrandView(generics.ListAPIView):

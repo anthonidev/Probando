@@ -44,7 +44,7 @@ class Order(models.Model):
                 full_name=self.full_name, date_issued=self.date_issued, city=self.city).count() + 1
             total_count = "{0:04d}".format(count)
             self.transaction_id = "{}/{}-{}/{}-{}-{}/{}".format(
-                year, self.full_name, self.city, month, date, total_count, secont, microsecond)
+                year, self.full_name.replace(" ", ""), self.city, month, date, total_count, secont, microsecond)
 
         super(Order, self).save(*args, **kwargs)
 
