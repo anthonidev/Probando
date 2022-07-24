@@ -48,6 +48,7 @@ MAIN_APPS = [
     'apps.shipping',
     'apps.coupon',
     'apps.order',
+    'apps.report',
 ]
 
 THIRD_PARTY_APPS = [

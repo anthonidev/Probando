@@ -20,7 +20,7 @@ class OrderAdmin(admin.ModelAdmin):
     #     return False
     inlines=[OrderItemInline]
     
-    list_display = ('id', 'transaction_id', 'amount', 'status', )
+    list_display = ('id', 'transaction_id', 'amount', 'status','date_issued' )
     list_display_links = ('id', 'transaction_id', )
     list_filter = ('status', )
     list_editable = ('status', )
